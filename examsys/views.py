@@ -123,6 +123,15 @@ def taketest(request, test_id):
 
 	t = Test.objects.filter(id=test_id)[0]
 
-	return render(request, 'test.html', {'t' : t})
+	tq = TestToQuestion.objects.filter(tid_id=test_id)
+
+	all_q = []
+
+	for i in tq:
+
+		q1 = Question.objects.filter(id=i.qid_id)
+		all_q.append(q1[0])
+
+	return render(request, 'test.html', {'t' : t, 'allq' : all_q})
 
 	# return HttpResponse("So, you wanna take a test?" + str(test_id))
