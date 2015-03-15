@@ -1,5 +1,5 @@
 <h1>Choose a test</h1>
 
 {% for test in alltests %}
-<a href="{% url 'examsys:taketest' test.id %}">{{ test.tname }}</a>
+<a href="{% url 'examsys:taketest' test.id %}">{{ test.tname }}</a> <br/>
 {% endfor %}
