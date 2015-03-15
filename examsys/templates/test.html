@@ -1,6 +1,19 @@
 <h1>Test {{ t.id }}</h1>
 <h2>{{ t.tname }}</h2>
 
-{% for q in allq %}
-<p>Question: {{ q.qtext }}</p>
-{% endfor %}
+<form action="{% url 'examsys:submit' %}" method="post">
+
+	{% csrf_token %}
+
+	{% for q in allq %}
+
+	<p>Question: {{ q.qtext }}</p>
+	<input type="text" name="{{ q.id }}">
+	<br/>
+	<br/>
+
+	{% endfor %}
+
+	<input type="submit">
+
+</form>
