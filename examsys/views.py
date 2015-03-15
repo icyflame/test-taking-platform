@@ -102,3 +102,28 @@ def register(request):
 	else:
 
 		return HttpResponse("You must have pressed register! :P")
+
+def loggedin(request):
+
+	return request.session['loggedin']
+
+def choosetest(request):
+
+	if not loggedin(request):
+
+		return HttpResponse("You must log in to see this page.")
+
+	t = Test.objects.all()
+
+	template = loader.get_template('choosetest.html')
+	context = RequestContext(request, {
+		'alltests' : t,
+		})
+
+	return HttpResponse(template.render(context))
+
+def taketest(request, test_id):
+
+	# find all the questions in this test
+
+	return HttpResponse("So, you wanna take a test?" + str(test_id))
