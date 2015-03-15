@@ -1,0 +1,19 @@
+<h1>Register now</h1>
+
+<form action="{% url 'examsys:register' %}" method="POST">
+
+	{% csrf_token %}
+	<p>Name:</p>
+	<input type="text" name="uname"/>
+	<br>
+	<br>
+	<p>Username:</p>
+	<input type="text" name="username"/>
+	<br>
+	<br>
+	<p>Password:</p> <input type="password" name="password"/>
+	<br>
+	<br>
+	<input type="submit" value="Login">
+
+</form>
