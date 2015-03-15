@@ -1,0 +1,27 @@
+<h1>Take a test now!</h1>
+
+{% if loggedin %}
+<p>You are logged in!</p>
+
+<form action="{% url 'examsys:logout' %}" method="post">
+	{% csrf_token %}
+	<input type="submit" value="Logout">
+</form>
+{% else %}
+
+<p>Log In</p>
+
+<form action="{% url 'examsys:login' %}" method="post">
+	{% csrf_token %}
+
+	<p>Username:</p>
+	<input type="text" name="username"/>
+	<br>
+	<br>
+	<p>Password:</p> <input type="password" name="password"/>
+	<br>
+	<br>
+	<input type="submit" value="Login">
+
+</form>
+{% endif %}
