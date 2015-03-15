@@ -8,6 +8,8 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext, loader
+from django.shortcuts import render
+
 from examsys.models import *
 
 def index(request):
@@ -95,9 +97,7 @@ def register(request):
 
 	elif request.method == "GET":
 
-		template = loader.get_template('register.html')
-		context = RequestContext(request, {})
-		return HttpResponse(template.render(context))
+		return render(request, 'register.html')
 
 	else:
 
@@ -115,15 +115,14 @@ def choosetest(request):
 
 	t = Test.objects.all()
 
-	template = loader.get_template('choosetest.html')
-	context = RequestContext(request, {
-		'alltests' : t,
-		})
-
-	return HttpResponse(template.render(context))
+	return render(request, 'choosetest.html', {'alltests' : t})
 
 def taketest(request, test_id):
 
 	# find all the questions in this test
 
-	return HttpResponse("So, you wanna take a test?" + str(test_id))
+	t = Test.objects.filter(id=test_id)[0]
+
+	return render(request, 'test.html', {'t' : t})
+
+	# return HttpResponse("So, you wanna take a test?" + str(test_id))
