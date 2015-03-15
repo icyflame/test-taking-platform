@@ -1,8 +1,12 @@
 <h1>Take a test now!</h1>
 
 {% if loggedin %}
-<p>{{ p.name }}</p>
+<p>Hi, {{ p.name }}</p>
 <p>You are logged in!</p>
+
+<a href="{% url 'examsys:choosetest' %}">Take a test</a>
+<br/>
+<br/>
 
 <form action="{% url 'examsys:logout' %}" method="post">
 	{% csrf_token %}
@@ -25,5 +29,7 @@
 	<input type="submit" value="Login">
 
 </form>
+
 <a href="{% url 'examsys:register' %}">Register</a>
+
 {% endif %}
