@@ -12,14 +12,24 @@ from examsys.models import *
 
 def index(request):
 	loggedin = False
+	name = ""
+	p = ""
+
 	try:
 		loggedin = request.session['loggedin']
 	except KeyError:
 		request.session['loggedin'] = False
 
+	if loggedin:
+
+		p = User.objects.filter(id=request.session['userid'])[0]
+		name = p.name
+
 	template = loader.get_template('index.html')
 	context = RequestContext(request, {
 		'loggedin' : loggedin,
+		'name' : name,
+		'p' : p
 		})
 	return HttpResponse(template.render(context))
 
@@ -64,4 +74,31 @@ def logout(request):
 
 def register(request):
 
-	return HttpResponse("You must have pressed register! :P")
+	if request.method == "POST":
+
+		name = request.POST['uname']
+		username = request.POST['username']
+		password = request.POST['password']
+
+		users = User.objects.filter(username=username)
+
+		if len(users) > 0:
+
+			return HttpResponse("Username exists! Register with a different username!")
+
+		else:
+
+			u = User(name=name, username=username, password=password)
+			u.save()
+
+			return HttpResponse("Registered!")
+
+	elif request.method == "GET":
+
+		template = loader.get_template('register.html')
+		context = RequestContext(request, {})
+		return HttpResponse(template.render(context))
+
+	else:
+
+		return HttpResponse("You must have pressed register! :P")
