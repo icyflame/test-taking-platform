@@ -6,4 +6,4 @@ from examsys.models import *
 admin.site.register(Question)
 admin.site.register(User)
 admin.site.register(Test)
-admin.site.register(TestToAnswer)
+admin.site.register(TestToQuestion)

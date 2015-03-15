@@ -13,6 +13,6 @@ class User(models.Model):
 class Test(models.Model):
 	tname = models.CharField(max_length=200)
 
-class TestToAnswer(models.Model):
+class TestToQuestion(models.Model):
 	qid = models.ForeignKey(Question)
 	tid = models.ForeignKey(Test)
