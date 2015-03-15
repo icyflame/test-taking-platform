@@ -10,5 +10,6 @@ urlpatterns = patterns('',
     url(r'^register/', views.register, name='register'),
     url(r'^choosetest/', views.choosetest, name='choosetest'),
     url(r'^(?P<test_id>\d+)/$', views.taketest, name='taketest'),
+    url(r'^submit/', views.submit, name='submit'),
     
 )

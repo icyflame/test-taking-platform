@@ -135,3 +135,13 @@ def taketest(request, test_id):
 	return render(request, 'test.html', {'t' : t, 'allq' : all_q})
 
 	# return HttpResponse("So, you wanna take a test?" + str(test_id))
+
+def submit(request):
+
+	if request.method == "POST":
+
+		return HttpResponse("You want to know your marks? :P")
+
+	else:
+
+		return HttpResponse("You can't trick me!")
