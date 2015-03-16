@@ -4,24 +4,30 @@
 
 <h2>Marks obtained: {{ marks_obtained }}/{{ total_marks }}</h2>
 
+{% if num_correct != 0 %}
 <h2>Correct questions:</h2>
 
 <ul>
 	{% for q in correctques %}
 	<li> 
-		Question ID {{ q.id }} <br/>
-		{{ q.qtext }}
+		<p>Question {{ q.id }}<p>
+		<p>{{ q.qtext }}<p>
+		<p>Answer: {{ q.correctans }}</p>
 	</li>
 	{% endfor %}
 </ul>
+{% endif %}
 
+{% if num_wrong != 0 %}
 <h2>Wrong questions:</h2>
 
 <ul>
 	{% for q in wrongques %}
 	<li> 
-		Question ID {{ q.id }} <br>
-		{{ q.qtext }}
+		<p>Question {{ q.id }}<p>
+		<p>{{ q.qtext }}<p>
+		<p>Answer: {{ q.correctans }}</p>
 	</li>
 	{% endfor %}
 </ul>
+{% endif %}

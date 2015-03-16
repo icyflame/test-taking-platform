@@ -184,6 +184,8 @@ def submit(request):
 		'wrongques' : wrongques,
 		'marks_obtained' : marks,
 		'total_marks' : total,
+		'num_correct' : len(correctques),
+		'num_wrong' : len(wrongques),
 		})
 
 	# return HttpResponse(str(i) + "; " + str(submitted) + "; " + str(calculated))
