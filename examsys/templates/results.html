@@ -11,8 +11,8 @@
 	{% for q in correctques %}
 	<li> 
 		<p>Question {{ q.id }}<p>
-		<p>{{ q.qtext }}<p>
-		<p>Answer: {{ q.correctans }}</p>
+		<p><b>Question: </b>{{ q.qtext }}<p>
+		<p><b>Answer: </b>{{ q.correctans }}</p>
 	</li>
 	{% endfor %}
 </ul>
@@ -25,8 +25,8 @@
 	{% for q in wrongques %}
 	<li> 
 		<p>Question {{ q.id }}<p>
-		<p>{{ q.qtext }}<p>
-		<p>Answer: {{ q.correctans }}</p>
+		<p><b>Question: </b>{{ q.qtext }}<p>
+		<p><b>Answer: </b>{{ q.correctans }}</p>
 	</li>
 	{% endfor %}
 </ul>

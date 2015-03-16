@@ -121,6 +121,10 @@ def choosetest(request):
 
 def taketest(request, test_id):
 
+	if not loggedin(request):
+
+		return HttpResponse("You must log in to see this page.")
+
 	# find all the questions in this test
 
 	t = Test.objects.filter(id=test_id)[0]
@@ -142,11 +146,10 @@ def submit(request):
 
 	if not request.method == "POST":
 
-		return HttpResponse("You can't trick me!")
+		return HttpResponse("Only POST requests will be accepted!")
 
 	marks = 0
-	correct = 0
-	wrong = 0
+	total = 0
 	correctques = []
 	wrongques = []
 
@@ -168,16 +171,15 @@ def submit(request):
 
 		if calculated == submitted:
 
-			marks += 1 # add the per question value
-			correct += 1 # number of questions correct
+			marks += 1 # add the question value
+			total += 1
 			correctques.append(Question.objects.filter(id=qid)[0])
 
 		else:
 
-			wrong += 1 # deduct the per question value
+			# deduct the question value (negative marking, if any)
+			total += 1 # add the question value
 			wrongques.append(Question.objects.filter(id=qid)[0])
-
-	total = correct + wrong
 
 	return render(request, 'results.html', {
 		'correctques' : correctques,
@@ -187,5 +189,3 @@ def submit(request):
 		'num_correct' : len(correctques),
 		'num_wrong' : len(wrongques),
 		})
-
-	# return HttpResponse(str(i) + "; " + str(submitted) + "; " + str(calculated))
