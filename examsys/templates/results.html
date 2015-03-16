@@ -1,0 +1,27 @@
+<h1>
+	Results
+</h1>
+
+<h2>Marks obtained: {{ marks_obtained }}/{{ total_marks }}</h2>
+
+<h2>Correct questions:</h2>
+
+<ul>
+	{% for q in correctques %}
+	<li> 
+		Question ID {{ q.id }} <br/>
+		{{ q.qtext }}
+	</li>
+	{% endfor %}
+</ul>
+
+<h2>Wrong questions:</h2>
+
+<ul>
+	{% for q in wrongques %}
+	<li> 
+		Question ID {{ q.id }} <br>
+		{{ q.qtext }}
+	</li>
+	{% endfor %}
+</ul>
