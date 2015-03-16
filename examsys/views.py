@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+import hashlib
+
 # def index(request):
 #     return HttpResponse("Hello, world. You're at the polls index.")
 
@@ -138,10 +140,50 @@ def taketest(request, test_id):
 
 def submit(request):
 
-	if request.method == "POST":
-
-		return HttpResponse("You want to know your marks? :P")
-
-	else:
+	if not request.method == "POST":
 
 		return HttpResponse("You can't trick me!")
+
+	marks = 0
+	correct = 0
+	wrong = 0
+	correctques = []
+	wrongques = []
+
+	for i in request.POST.keys():
+
+		if i[0] == 'c':
+
+			continue
+
+		answer = request.POST[i].lower()
+		
+		qid = int(i)
+
+		correctanswer = Question.objects.filter(id=qid)[0].correctans.lower()
+
+		submitted = hashlib.sha224(answer).hexdigest()
+
+		calculated = hashlib.sha224(correctanswer).hexdigest()
+
+		if calculated == submitted:
+
+			marks += 1 # add the per question value
+			correct += 1 # number of questions correct
+			correctques.append(Question.objects.filter(id=qid)[0])
+
+		else:
+
+			wrong += 1 # deduct the per question value
+			wrongques.append(Question.objects.filter(id=qid)[0])
+
+	total = correct + wrong
+
+	return render(request, 'results.html', {
+		'correctques' : correctques,
+		'wrongques' : wrongques,
+		'marks_obtained' : marks,
+		'total_marks' : total,
+		})
+
+	# return HttpResponse(str(i) + "; " + str(submitted) + "; " + str(calculated))
