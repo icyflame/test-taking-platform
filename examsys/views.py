@@ -10,7 +10,7 @@ import hashlib
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext, loader
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from examsys.models import *
 
@@ -52,11 +52,11 @@ def login(request):
 			request.session["loggedin"] = True
 			request.session["userid"] = users[0].id
 
-			# redirect('views.index')
+			# return redirect('views/index')
 
-			# return HttpResponseRedirect("examsys/")
+			return HttpResponseRedirect("/examsys/")
 
-			return HttpResponse("Validated properly!" + str(request.session))
+			# return HttpResponse("Validated properly!" + str(request.session))
 
 		else:
 
@@ -75,8 +75,8 @@ def logout(request):
 	request.session["loggedin"] = False
 	request.session["userid"] = 0
 
-	return HttpResponse("You have been successfully logged out.")
-
+	return HttpResponseRedirect("/examsys/")
+	
 def register(request):
 
 	if request.method == "POST":
