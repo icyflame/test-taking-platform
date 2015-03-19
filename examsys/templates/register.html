@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block body_block %}
 <h1>Register now</h1>
 
 <form action="{% url 'examsys:register' %}" method="POST">
@@ -17,3 +20,4 @@
 	<input type="submit" value="Login">
 
 </form>
+{% endblock %}

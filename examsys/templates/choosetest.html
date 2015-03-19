@@ -1,5 +1,9 @@
+{% extends 'base.html' %}
+
+{% block body_block %}
 <h1>Choose a test</h1>
 
 {% for test in alltests %}
 <a href="{% url 'examsys:taketest' test.id %}">{{ test.tname }}</a> <br/>
 {% endfor %}
+{% endblock %}
