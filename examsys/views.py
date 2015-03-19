@@ -41,6 +41,7 @@ def login(request):
 
 	username = request.POST['username']
 	password = request.POST['password']
+	password = hashlib.sha224(password).hexdigest()
 
 	users = User.objects.filter(username=username)
 
@@ -83,6 +84,7 @@ def register(request):
 		name = request.POST['uname']
 		username = request.POST['username']
 		password = request.POST['password']
+		password = hashlib.sha224(password).hexdigest()
 
 		users = User.objects.filter(username=username)
 
