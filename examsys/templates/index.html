@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+{% block body_block %}
+<div style="text-align: center">
 <h1>Take a test now!</h1>
 
 {% if loggedin %}
@@ -20,7 +24,7 @@
 	{% csrf_token %}
 
 	<p>Username:</p>
-	<input type="text" name="username"/>
+	<input type="text" name="username" autofocus/>
 	<br>
 	<br>
 	<p>Password:</p> <input type="password" name="password"/>
@@ -33,3 +37,5 @@
 <a href="{% url 'examsys:register' %}">Register</a>
 
 {% endif %}
+</div>
+{% endblock %}
